@@ -34,7 +34,7 @@ if process_button:
             st.info("Initializing browser...")
             chrome_options = Options()
             chrome_options.add_argument("--headless")
-            # You may need to specify the executable_path if not in PATH:
+            # Provide a path to chromedriver if needed.
             # driver = webdriver.Chrome(executable_path='path/to/chromedriver', options=chrome_options)
             driver = webdriver.Chrome(options=chrome_options)
 
@@ -49,11 +49,8 @@ if process_button:
             driver.find_element(By.XPATH, "//button[@type='submit']").click()
             time.sleep(5)
 
-            # Verify login by checking if we are on feed page or user profile
-            # (In a robust script, we'd add checks)
-            
-            # Initialize Groq client
-            groq_client = Groq(api_key='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')
+            # Initialize Groq client using API key from secrets
+            groq_client = Groq(api_key=st.secrets["groq"]["api_key"])
 
             extracted_data = []
             progress_bar = st.progress(0)
